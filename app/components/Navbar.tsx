@@ -144,56 +144,61 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Bottom Row - My Matches */}
+        {/* Bottom Row - Live Matches */}
         <div className="max-w-full">
-          <div className="mb-2">
-            <h2 className="text-sm sm:text-base font-semibold">My Matches</h2>
+          <div className="mb-2 ml-3 sm:ml-4">
+            <h2 className="text-sm sm:text-base font-semibold flex items-center">
+              <span className="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
+              Live Matches
+            </h2>
           </div>
           
-          <div className="flex overflow-x-auto space-x-3 pb-2 scrollbar-hide">
-            {defaultMatches.map((match) => (
-              <div key={match.id} className="bg-[#101028] rounded-lg overflow-hidden min-w-[220px] sm:min-w-[240px] flex-shrink-0">
-                {/* Match teams */}
-                <div className="px-2 sm:px-3 pt-2 sm:pt-3 pb-2">
-                  <div className="mb-2">
-                    {/* Teams */}
-                    <div className="w-full">
-                      {/* Team 1 */}
-                      <div className="flex items-center mb-2">
-                        <div className="w-8 h-8 sm:w-9 sm:h-9 overflow-hidden flex items-center justify-center mr-2 sm:mr-3">
-                          <img 
-                            src={getTeamLogo(match.team1.code)} 
-                            alt={match.team1.code}
-                            width={32}
-                            height={32}
-                            className="w-full h-full object-contain sm:w-[36px] sm:h-[36px]"
-                          />
+          <div className="flex justify-center">
+            <div className="flex overflow-x-auto space-x-3 pb-2 scrollbar-hide w-full px-2 sm:px-4">
+              {defaultMatches.map((match) => (
+                <div key={match.id} className="bg-[#101028] rounded-lg overflow-hidden min-w-[280px] sm:min-w-[320px] max-w-md mx-auto flex-shrink-0">
+                  {/* Match teams */}
+                  <div className="px-4 sm:px-5 pt-3 pb-2">
+                    <div className="mb-2">
+                      {/* Teams */}
+                      <div className="w-full">
+                        {/* Team 1 */}
+                        <div className="flex items-center mb-3">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 overflow-hidden flex items-center justify-center mr-3 sm:mr-4">
+                            <img 
+                              src={getTeamLogo(match.team1.code)} 
+                              alt={match.team1.code}
+                              width={40}
+                              height={40}
+                              className="w-full h-full object-contain sm:w-[48px] sm:h-[48px]"
+                            />
+                          </div>
+                          <span className="text-sm sm:text-base text-gray-300 truncate">{match.team1.name}</span>
                         </div>
-                        <span className="text-xs sm:text-sm text-gray-300 truncate">{match.team1.name}</span>
-                      </div>
-                      
-                      {/* Team 2 */}
-                      <div className="flex items-center">
-                        <div className="w-8 h-8 sm:w-9 sm:h-9 overflow-hidden flex items-center justify-center mr-2 sm:mr-3">
-                          <img 
-                            src={getTeamLogo(match.team2.code)} 
-                            alt={match.team2.code}
-                            width={32}
-                            height={32}
-                            className="w-full h-full object-contain sm:w-[36px] sm:h-[36px]"
-                          />
+                        
+                        {/* Team 2 */}
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 overflow-hidden flex items-center justify-center mr-3 sm:mr-4">
+                            <img 
+                              src={getTeamLogo(match.team2.code)} 
+                              alt={match.team2.code}
+                              width={40}
+                              height={40}
+                              className="w-full h-full object-contain sm:w-[48px] sm:h-[48px]"
+                            />
+                          </div>
+                          <span className="text-sm sm:text-base text-gray-300 truncate">{match.team2.name}</span>
                         </div>
-                        <span className="text-xs sm:text-sm text-gray-300 truncate">{match.team2.name}</span>
                       </div>
                     </div>
-                  </div>
-                  
-                  <div className="text-xs text-gray-400 text-right">
-                    {match.startTime}
+                    
+                    <div className="text-xs sm:text-sm text-gray-400 text-right mt-2">
+                      {match.startTime}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
