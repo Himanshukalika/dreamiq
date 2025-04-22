@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useRef } from 'react';
 
 interface MatchProps {
   id: string;
@@ -20,6 +20,17 @@ interface MatchProps {
 }
 
 const UpcomingMatches: React.FC = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Touch handling for mobile scroll
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+    
+    // Prevent parent elements from scrolling horizontally
+    e.stopPropagation();
+  };
+
   const matches: MatchProps[] = [
     {
       id: "match1",
@@ -91,13 +102,22 @@ const UpcomingMatches: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
-      <div className="overflow-x-auto pb-4">
-        <div className="flex space-x-4 min-w-max">
+    <div className="max-w-7xl mx-auto px-0 overflow-x-hidden">
+      <div 
+        ref={scrollContainerRef}
+        className="overflow-x-auto pb-4 scrollbar-hide no-scrollbar"
+        style={{ 
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none', 
+          msOverflowStyle: 'none'
+        }}
+        onTouchStart={handleTouchStart}
+      >
+        <div className="flex space-x-4 px-4 min-w-max">
           {matches.map((match) => (
             <div 
               key={match.id}
-              className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden w-64 p-2"
+              className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden w-64 p-2 flex-shrink-0"
             >
               <div className="flex">
                 <div 
